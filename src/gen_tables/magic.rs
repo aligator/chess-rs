@@ -163,7 +163,7 @@ pub fn write_magic(f: &mut File) {
     writeln!(f, "]];").unwrap();
 
     unsafe {
-        writeln!(f, "static MOVES: [BitBoard; {}] = [", GENERATED_NUM_MOVES).unwrap();
+        writeln!(f, "static MOVES: [BitBoard; {}] = [", *&raw const GENERATED_NUM_MOVES).unwrap();
         for i in 0..GENERATED_NUM_MOVES {
             writeln!(f, "    BitBoard({}),", MOVES[i].0).unwrap();
         }

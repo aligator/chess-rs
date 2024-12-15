@@ -74,6 +74,6 @@ pub fn write_bitboard_data(f: &mut File) {
         }
         writeln!(f, "];").unwrap();
         writeln!(f, "/// What are all the edge squares on the `BitBoard`?").unwrap();
-        writeln!(f, "pub const EDGES: BitBoard = BitBoard({});", EDGES.0).unwrap();
+        writeln!(f, "pub const EDGES: BitBoard = BitBoard({});", *&raw const EDGES.0).unwrap();
     }
 }

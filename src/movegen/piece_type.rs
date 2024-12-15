@@ -12,7 +12,6 @@ use crate::magic::{
 };
 
 pub trait PieceType {
-    fn is(piece: Piece) -> bool;
     fn into_piece() -> Piece;
     fn pseudo_legals(src: Square, color: Color, combined: BitBoard, mask: BitBoard) -> BitBoard;
     #[inline(always)]
@@ -112,10 +111,6 @@ impl PawnType {
 }
 
 impl PieceType for PawnType {
-    fn is(piece: Piece) -> bool {
-        piece == Piece::Pawn
-    }
-
     fn into_piece() -> Piece {
         Piece::Pawn
     }
@@ -194,10 +189,6 @@ impl PieceType for PawnType {
 }
 
 impl PieceType for BishopType {
-    fn is(piece: Piece) -> bool {
-        piece == Piece::Bishop
-    }
-
     fn into_piece() -> Piece {
         Piece::Bishop
     }
@@ -209,10 +200,6 @@ impl PieceType for BishopType {
 }
 
 impl PieceType for KnightType {
-    fn is(piece: Piece) -> bool {
-        piece == Piece::Knight
-    }
-
     fn into_piece() -> Piece {
         Piece::Knight
     }
@@ -261,10 +248,6 @@ impl PieceType for KnightType {
 }
 
 impl PieceType for RookType {
-    fn is(piece: Piece) -> bool {
-        piece == Piece::Rook
-    }
-
     fn into_piece() -> Piece {
         Piece::Rook
     }
@@ -276,10 +259,6 @@ impl PieceType for RookType {
 }
 
 impl PieceType for QueenType {
-    fn is(piece: Piece) -> bool {
-        piece == Piece::Queen
-    }
-
     fn into_piece() -> Piece {
         Piece::Queen
     }
@@ -329,10 +308,6 @@ impl KingType {
 }
 
 impl PieceType for KingType {
-    fn is(piece: Piece) -> bool {
-        piece == Piece::King
-    }
-
     fn into_piece() -> Piece {
         Piece::King
     }
