@@ -1269,6 +1269,32 @@ impl Board {
     pub fn checkers(&self) -> &BitBoard {
         &self.checkers
     }
+
+    /// Give me which squares does a side attacks without checking checks
+    pub fn pseudo_attacks(&self, color: Color) -> BitBoard {
+        use crate::movegen::piece_type::*;
+
+        let mut attacks = BitBoard::new(0);
+
+        for square in self.color_combined(color).into_iter() {
+            let piece = unsafe { self.piece_on(square).unwrap_unchecked() };
+
+            attacks |= if piece == Piece::Pawn {
+                crate::magic::get_pawn_attacks(square, color, BitBoard::new(!0))
+            } else {
+                (match piece {
+                    Piece::Pawn => unreachable!(),
+                    Piece::Knight => KnightType::pseudo_legals,
+                    Piece::Bishop => BishopType::pseudo_legals,
+                    Piece::Rook => RookType::pseudo_legals,
+                    Piece::Queen => QueenType::pseudo_legals,
+                    Piece::King => KingType::pseudo_legals,
+                })(square, color, *self.combined(), BitBoard::new(!0))
+            }
+        }
+
+        attacks
+    }
 }
 
 impl fmt::Display for Board {
