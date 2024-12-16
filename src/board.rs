@@ -1271,13 +1271,13 @@ impl Board {
     }
 
     /// Give me which pieces attacks a given square
-    pub fn pseudo_attacks_to(&self, square: Square, combined: BitBoard) -> BitBoard {
+    pub fn pseudo_attacks_to(&self, square: Square, consider: BitBoard, combined: BitBoard) -> BitBoard {
         use crate::movegen::piece_type::*;
 
         let mut attacks = BitBoard::new(0);
         let checks = BitBoard::from_square(square);
 
-        for square in combined.into_iter() {
+        for square in consider.into_iter() {
             let piece = unsafe { self.piece_on(square).unwrap_unchecked() };
             let color = unsafe { self.color_on(square).unwrap_unchecked() };
 
