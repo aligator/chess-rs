@@ -44,3 +44,10 @@ opt-level = 3
 const_for = "0.1.2"
 rand = { version = "0.7.2", default-features = false, features = ["small_rng"] }
 thiserror = "1.0.44"
+
+[dev-dependencies]
+criterion = "0.5.1"
+
+[[bench]]
+name = "perft"
+harness = false
